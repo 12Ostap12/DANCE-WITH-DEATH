@@ -1,25 +1,30 @@
-from webbrowser import BackgroundBrowser
 from pygame import*
 from buttom import Button
+from sprite import Player
 
 window = display.set_mode((500,700))
 clock = time.Clock()
-
-
 
 game = True
 pause = True
 
 btn1 = Button(50, 50, 400, 400, 'start.png')
 btn2 = Button(100, 400, 300, 120, 'exit.png')
-bg = transform.scale(image.load('road.jpg'), (500, 700))
-   
+bg = image.load('road.jpg')
+
+bg = transform.rotate(bg,90)  
+bg = transform.scale(bg, (500, 700))
+
 
 while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
 
+        if e.type == KEYDOWN:
+
+            if e.key == K_ESCAPE:
+                pause = True
     
     if pause == True:
         window.fill((255, 255, 255))
