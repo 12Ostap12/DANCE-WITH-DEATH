@@ -1,22 +1,24 @@
 from pygame import*
 from button import Button
-from sprite import Player
+from sprite import Player, Enemy
 
-window = display.set_mode((500,700))
+window = display.set_mode((600,700))
 clock = time.Clock()
 
 game = True
 pause = True
 run = False
 
-btn1 = Button(50, 50, 400, 400, 'start.png')
-btn2 = Button(100, 400, 300, 120, 'exit.png')
-car = Player('car.png', 100, 400, 125, 250, 10 )
+btn1 = Button(50, -50, 500, 500, 'start.png')
+btn2 = Button(130, 400, 350, 150, 'exit.png')
+car = Player('mercedes.png', 295, 470, 225, 150, 10 )
+car.rotate(270)
 bg = image.load('road.jpg')
 
-
+enemy = Enemy('nisan.png', 200, 470, 200, 120, 10)
+enemy.rotate(90)
 bg = transform.rotate(bg,90)  
-bg = transform.scale(bg, (500, 700))
+bg = transform.scale(bg, (600, 700))
 bg_width = bg.get_height()
 tiles = 3
 scroll = 0
@@ -39,13 +41,16 @@ while game:
             game = False          
     else:
    
-        for i in range(0, tiles):
-            window.blit(bg, (0,i * bg_width + scroll))
+        
+        window.blit(bg, (0,0 + scroll))
+        window.blit(bg, (0,-700 + scroll))
+
         scroll += 3
 
         if scroll > 700:
             scroll = 0
-
+        enemy.draw(window)
+        enemy.update()
         car.draw(window)
         car.move()
 
