@@ -1,4 +1,5 @@
 from pygame import*
+from random import*
 
 class GameSprite(sprite.Sprite):
     def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed):
@@ -21,17 +22,32 @@ class Player(GameSprite):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_w] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys_pressed[K_s] and self.rect.y < 470:
+        if keys_pressed[K_s] and self.rect.y < 560:
             self.rect.y += self.speed
         if keys_pressed[K_a] and self.rect.x > 5:
             self.rect.x -= self.speed
-        if keys_pressed[K_d] and self.rect.x < 400:
+        if keys_pressed[K_d] and self.rect.x < 520:
             self.rect.x += self.speed
+
+    def collide(self,enemys):
+       
+        for enemy in enemys:
+            if enemy.rect.colliderect(self.rect):
+                return True
+
 
 class Enemy(GameSprite):
     def update(self):
         self.rect.y += 5
         if self.rect.y >= 700:
-            self.rect.y = -100
-            self.rect.x =
+            self.rect.y = randint(-600,-100)
+            self.rect.x = randint(0,500)
     
+    def kill_collides(self,enemy):
+        if self.rect.colliderect(enemy.rect):
+            self.rect.x = randint(0,500)
+            self.rect.y = randint(-600,-100)
+
+    def set_cor(self,x,y):
+        self.rect.x = x
+        self.rect.y = y
