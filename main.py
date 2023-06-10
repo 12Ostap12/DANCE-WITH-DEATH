@@ -11,23 +11,26 @@ run = False
 
 btn1 = Button(50, -50, 500, 500, 'start.png')
 btn2 = Button(130, 400, 350, 150, 'exit.png')
-car = Player('mercedes.png', 295, 470, 130, 70, 10 )
+car = Player('mercedes.png', 295, 470, 100, 50, 10 )
 car.rotate(270)
 bg = image.load('road.jpg')
 
 enemyGroup = sprite.Group()
-enemy = Enemy('nisan.png', 100, 800, 130, 75, 10)
+enemy = Enemy('nisan.png', 100, 800, 100, 55, 10)
 enemy.rotate(90)
-enemy1 = Enemy('citroen.png', 200, 800, 130, 75, 10)
+enemy1 = Enemy('citroen.png', 200, 800, 100, 55, 10)
 enemy1.rotate(90)
-enemy2 = Enemy('formula.png', 400, 800, 70, 130, 10)
-enemy3 = Enemy('jaguar.png', 300, 800, 130, 60, 10)
+enemy2 = Enemy('formula.png', 400, 800, 55, 120, 10)
+enemy3 = Enemy('jaguar.png', 91000, 800, 100, 50, 10)
 enemy3.rotate(90)
 enemyGroup.add(enemy)
 enemyGroup.add(enemy1)
 enemyGroup.add(enemy2)
 enemyGroup.add(enemy3)
 
+mixer.init()
+mixer.music.load('Music.mp3')
+mixer.music.play()
 
 bg = transform.rotate(bg,90)  
 bg = transform.scale(bg, (600, 700))
@@ -49,6 +52,7 @@ while game:
         window.fill((255, 255, 255))
         if btn1.draw(window):
             pause = False
+            mixer.music.play()
         if btn2.draw(window):
             game = False          
     else:
@@ -83,6 +87,8 @@ while game:
         if car.collide([enemy1, enemy2, enemy3, enemy]):
             pause = True
 
+            mixer.music.stop()
+            
             enemy.set_cor(200,200)
             enemy1.set_cor(200,200)
             enemy2.set_cor(200,200)

@@ -22,11 +22,11 @@ class Player(GameSprite):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_w] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys_pressed[K_s] and self.rect.y < 560:
+        if keys_pressed[K_s] and self.rect.y < 590:
             self.rect.y += self.speed
         if keys_pressed[K_a] and self.rect.x > 5:
             self.rect.x -= self.speed
-        if keys_pressed[K_d] and self.rect.x < 520:
+        if keys_pressed[K_d] and self.rect.x < 540:
             self.rect.x += self.speed
 
     def collide(self,enemys):
@@ -40,7 +40,7 @@ class Enemy(GameSprite):
     def update(self):
         self.rect.y += 5
         if self.rect.y >= 700:
-            self.rect.y = randint(-600,-100)
+            self.rect.y = randint(-800,-100)
             self.rect.x = randint(0,500)
     
     def kill_collides(self,enemy):
